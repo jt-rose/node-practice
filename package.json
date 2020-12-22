@@ -1,0 +1,11 @@
+{
+  "name": "nodeprac",
+  "version": "1.0.0",
+  "description": "practice for node",
+  "main": "index.ts",
+  "license": "MIT",
+  "dependencies": {
+    "@types/node": "^14.14.14",
+    "express": "^4.17.1"
+  }
+}
