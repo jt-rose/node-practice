@@ -10,9 +10,27 @@ app.get("/", (req, res) => {
     res.send("beep boop")
 })
 
+// contact page
 app.get("/contact", (req, res) => {
     res.type("text/plain")
     res.send("don't worry, we'll find you")
+})
+
+// api
+app.get("/user", (req, res) => {
+    res.json({
+        name: "Dracula",
+        location: "Transylvania",
+        hobbies: "sucking blood"
+    })
+})
+
+app.get("/user2", (req, res) => {
+    res.json({
+        name: "Zombie",
+        location: "RCPD station",
+        hobbies: "eating brains"
+    })
 })
 
 // 404 page
