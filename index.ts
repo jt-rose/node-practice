@@ -10,6 +10,11 @@ app.get("/", (req, res) => {
     res.send("beep boop")
 })
 
+app.get("/contact", (req, res) => {
+    res.type("text/plain")
+    res.send("don't worry, we'll find you")
+})
+
 // 404 page
 app.use((req, res) => {
     res.type("text/plain")
