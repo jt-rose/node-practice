@@ -1,4 +1,18 @@
-const express = require("express")
+import express = require("express")
+
+// mock db
+const mockDB = [
+    {
+        name: "Dracula",
+        location: "Transylvania",
+        hobbies: "sucking blood"
+    },
+    {
+        name: "Zombie",
+        location: "RCPD station",
+        hobbies: "eating brains"
+    }
+]
 
 const app = express()
 
@@ -16,7 +30,7 @@ app.get("/contact", (req, res) => {
     res.send("don't worry, we'll find you")
 })
 
-// api
+// sending JSON
 app.get("/user", (req, res) => {
     res.json({
         name: "Dracula",
@@ -25,12 +39,32 @@ app.get("/user", (req, res) => {
     })
 })
 
+// sending another JSON
 app.get("/user2", (req, res) => {
     res.json({
         name: "Zombie",
         location: "RCPD station",
         hobbies: "eating brains"
     })
+})
+
+// search query
+app.get("/api", (req, res) => {
+    const monsterName = "name" in req.query ? req.query.name : null;
+    console.log(monsterName);
+
+    if (monsterName) {
+        const monster = mockDB.find(x => x.name === monsterName);
+        if (monster) {
+            res.json(monster)
+        } else {
+            res.type("text/plain")
+            res.send(`no ${monsterName} at the mash`)
+        }
+    } else {
+        res.type("text/plain")
+        res.send(`please use a search query with a name parameter`)
+    }
 })
 
 // 404 page
