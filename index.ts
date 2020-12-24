@@ -67,6 +67,24 @@ app.get("/api/:name", (req, res) => {
     }
 })
 
+// add a new monster
+// sample: add/{"name":"Cthulu","location":"Murky Depths","hobbies":"spelunking"}
+app.get("/add/:monster", (req, res) => {
+    const monster = JSON.parse(req.params.monster);
+    const monsterKeys = ["name", "location", "hobbies"];
+    // confirm object shape and add to mockDB
+    if (monsterKeys.every(key => 
+        key in monster && typeof monster[key] === "string")) {
+        mockDB.push(monster);
+        res.type("text/plain")
+        res.send(`${monster.name} has joined the mash`)
+    } else {
+        //reject if wrong object shape
+        res.type("text/plain")
+        res.send("Please provide the right object")
+    }
+})
+
 // 404 page
 app.use((req, res) => {
     res.type("text/plain")
