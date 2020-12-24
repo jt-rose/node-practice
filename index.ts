@@ -49,8 +49,8 @@ app.get("/user2", (req, res) => {
 })
 
 // search query
-app.get("/api", (req, res) => {
-    const monsterName = "name" in req.query ? req.query.name : null;
+app.get("/api/:name", (req, res) => {
+    const monsterName = req.params.name;
     console.log(monsterName);
 
     if (monsterName) {
