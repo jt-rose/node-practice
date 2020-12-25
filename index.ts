@@ -1,7 +1,7 @@
 import express = require("express")
 
 // mock db
-const mockDB = [
+let mockDB = [
     {
         name: "Dracula",
         location: "Transylvania",
@@ -82,6 +82,19 @@ app.get("/add/:monster", (req, res) => {
         //reject if wrong object shape
         res.type("text/plain")
         res.send("Please provide the right object")
+    }
+})
+
+app.get("/remove/:monster", (req, res) => {
+    const monsterName = req.params.monster;
+    const monster = mockDB.find(x => x.name === monsterName);
+    if (monster) {
+        mockDB = mockDB.filter(x => x.name !== monsterName)
+        res.type("text/plain")
+        res.send(`${monsterName} has been kicked out of the mash`)
+    } else {
+        res.type("text/plain")
+        res.send(`Could ${monsterName} be invisible or a ghost? No ${monsterName} found at this party`)
     }
 })
 
